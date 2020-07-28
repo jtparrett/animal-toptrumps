@@ -37,24 +37,26 @@ export const AnimalCard = ({ isLoading, animal }) => (
 
       <Card.Stat
         name="Extinct"
-        value={animal?.extinct ? "Yes" : "No"}
+        value={animal?.extinct ? "Extinct" : "Not extinct"}
         isLoading={isLoading}
       />
     </SimpleGrid>
-    <Stack direction="row" pt={3}>
-      <Button
-        leftIcon="delete"
-        variantColor="red"
-        flex={1}
-        size="sm"
-        variant="outline"
-      >
-        Delete
-      </Button>
-      <Button flex={1} size="sm" variant="outline">
-        Edit
-      </Button>
-    </Stack>
+    {!isLoading && (
+      <Stack direction="row" pt={3}>
+        <Button
+          leftIcon="delete"
+          variantColor="red"
+          flex={1}
+          size="sm"
+          variant="outline"
+        >
+          Delete
+        </Button>
+        <Button flex={1} size="sm" variant="outline">
+          Edit
+        </Button>
+      </Stack>
+    )}
   </Card>
 );
 

@@ -10,7 +10,7 @@ export const Catalogue = () => {
   const { data, loading } = useQuery(GET_ANIMALS);
 
   return (
-    <Wrapper pt={6}>
+    <Wrapper py={10}>
       <Flex alignItems="flex-end" pb={4}>
         <Text fontSize="4xl" fontWeight="bold" mr="auto">
           Catalogue
@@ -23,7 +23,7 @@ export const Catalogue = () => {
           sm: 2,
           md: 3,
         }}
-        spacing={3}
+        spacing={4}
       >
         {loading &&
           Array.from(Array(3)).map((_, i) => <AnimalCard key={i} isLoading />)}

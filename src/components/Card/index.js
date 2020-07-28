@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { Box, Skeleton, Flex, Text } from "@chakra-ui/core";
 
 export const Card = ({ children }) => (
-  <Box borderWidth="1px" rounded="md" overflow="hidden" p={3}>
+  <Box borderWidth="1px" rounded="md" overflow="hidden" p={4}>
     {children}
   </Box>
 );
 
 const CardStat = ({ name, value, icon, isLoading }) => (
   <Skeleton height="24px" isLoaded={!isLoading}>
-    <Flex alignItems="center">
+    <Flex alignItems="center" color="gray.600">
       <Text mr="auto">{name}</Text>
       <Text fontWeight="bold">{value}</Text>
       {icon && <Box as={icon} size="20px" ml={1} />}

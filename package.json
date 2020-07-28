@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "migrate": "^1.7.0",
     "netlify-cli": "^2.58.0"
   }
 }
