@@ -11,6 +11,7 @@ import {
   ANIMAL_DIET_TYPE_ICONS,
 } from "../../consts";
 import { Card } from "../Card";
+import { DeleteModal } from "./components";
 
 export const AnimalCard = ({ isLoading, animal }) => (
   <Card>
@@ -43,15 +44,7 @@ export const AnimalCard = ({ isLoading, animal }) => (
     </SimpleGrid>
     {!isLoading && (
       <Stack direction="row" pt={3}>
-        <Button
-          leftIcon="delete"
-          variantColor="red"
-          flex={1}
-          size="sm"
-          variant="outline"
-        >
-          Delete
-        </Button>
+        <DeleteModal />
         <Button flex={1} size="sm" variant="outline">
           Edit
         </Button>

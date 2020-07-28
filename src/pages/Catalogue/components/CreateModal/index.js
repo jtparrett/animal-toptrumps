@@ -6,17 +6,18 @@ import {
   FormControl,
   FormLabel,
   Select,
-  Box,
   Flex,
   Stack,
   Switch,
   Input,
   FormErrorMessage,
+  Modal,
+  ModalOverlay,
+  ModalContent,
 } from "@chakra-ui/core";
 import { useMutation } from "@apollo/client";
 import * as Yup from "yup";
 
-import { Modal } from "../../../../components";
 import { ANIMAL_TYPE, ANIMAL_DIET_TYPE } from "../../../../consts";
 import { CREATE_ANIMAL } from "./graphql";
 
@@ -55,8 +56,14 @@ export const CreateModal = () => {
       <Button rightIcon="add" onClick={() => setIsOpen(true)}>
         Create animal
       </Button>
-      <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
-        <Box w="300px" maxW="100%" as="form" onSubmit={formik.handleSubmit}>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <ModalOverlay />
+        <ModalContent
+          p={4}
+          rounded="md"
+          as="form"
+          onSubmit={formik.handleSubmit}
+        >
           <Stack spacing={4}>
             <FormControl isInvalid={formik.errors.name}>
               <FormLabel htmlFor="name">Name</FormLabel>
@@ -130,7 +137,7 @@ export const CreateModal = () => {
               </Button>
             </Flex>
           </Stack>
-        </Box>
+        </ModalContent>
       </Modal>
     </>
   );
