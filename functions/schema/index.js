@@ -5,6 +5,10 @@ const typeDefs = gql`
     getAnimals: [Animal]
   }
 
+  type Mutation {
+    createAnimal(animal: AnimalInput!): Boolean
+  }
+
   type Animal {
     id: ID!
     name: String
@@ -23,6 +27,13 @@ const typeDefs = gql`
   enum AnimalDietType {
     CARNIVORE
     HERBIVORE
+  }
+
+  input AnimalInput {
+    name: String!
+    type: AnimalType!
+    diet: AnimalDietType!
+    extinct: Boolean!
   }
 `;
 

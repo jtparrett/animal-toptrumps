@@ -11,13 +11,20 @@ export const Catalogue = () => {
 
   return (
     <Wrapper pt={6}>
-      <Flex alignItems="flex-end" pb={2}>
+      <Flex alignItems="flex-end" pb={4}>
         <Text fontSize="4xl" fontWeight="bold" mr="auto">
           Catalogue
         </Text>
         <CreateModal />
       </Flex>
-      <SimpleGrid columns={3} spacing={3}>
+      <SimpleGrid
+        columns={{
+          xs: 1,
+          sm: 2,
+          md: 3,
+        }}
+        spacing={3}
+      >
         {loading &&
           Array.from(Array(3)).map((_, i) => <AnimalCard key={i} isLoading />)}
 

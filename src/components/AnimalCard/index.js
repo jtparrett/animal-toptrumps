@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import capitalize from "lodash/fp/capitalize";
 import { gql } from "@apollo/client";
-import { Text, Skeleton, Flex, SimpleGrid, Box } from "@chakra-ui/core";
+import { Text, Skeleton, SimpleGrid, Button, Stack } from "@chakra-ui/core";
 
 import {
   ANIMAL_TYPE,
@@ -29,7 +29,7 @@ export const AnimalCard = ({ isLoading, animal }) => (
       />
 
       <Card.Stat
-        name="Diet"
+        name="Diet type"
         value={capitalize(animal?.diet)}
         icon={animal?.diet && ANIMAL_DIET_TYPE_ICONS[animal?.diet]}
         isLoading={isLoading}
@@ -41,6 +41,20 @@ export const AnimalCard = ({ isLoading, animal }) => (
         isLoading={isLoading}
       />
     </SimpleGrid>
+    <Stack direction="row" pt={3}>
+      <Button
+        leftIcon="delete"
+        variantColor="red"
+        flex={1}
+        size="sm"
+        variant="outline"
+      >
+        Delete
+      </Button>
+      <Button flex={1} size="sm" variant="outline">
+        Edit
+      </Button>
+    </Stack>
   </Card>
 );
 
@@ -63,5 +77,6 @@ export const AnimalCardFragment = gql`
     name
     type
     diet
+    extinct
   }
 `;
