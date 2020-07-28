@@ -2,7 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import capitalize from "lodash/fp/capitalize";
 import { gql } from "@apollo/client";
-import { Text, Skeleton, SimpleGrid, Button, Stack } from "@chakra-ui/core";
+import {
+  Text,
+  Skeleton,
+  SimpleGrid,
+  Button,
+  Stack,
+  Box,
+} from "@chakra-ui/core";
 
 import {
   ANIMAL_TYPE,
@@ -42,12 +49,16 @@ export const AnimalCard = ({ isLoading, animal }) => (
         isLoading={isLoading}
       />
     </SimpleGrid>
-    {!isLoading && (
+    {animal && (
       <Stack direction="row" pt={3}>
-        <DeleteModal />
-        <Button flex={1} size="sm" variant="outline">
-          Edit
-        </Button>
+        <Box flex={1}>
+          <DeleteModal id={animal?.id} />
+        </Box>
+        <Box flex={1}>
+          <Button size="sm" variant="outline" w="100%">
+            Edit
+          </Button>
+        </Box>
       </Stack>
     )}
   </Card>
@@ -61,6 +72,7 @@ AnimalCard.defaultProps = {
 AnimalCard.propTypes = {
   isLoading: PropTypes.bool,
   animal: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.oneOf(Object.keys(ANIMAL_TYPE)),
     diet: PropTypes.oneOf(Object.keys(ANIMAL_DIET_TYPE)),
@@ -69,6 +81,7 @@ AnimalCard.propTypes = {
 
 export const AnimalCardFragment = gql`
   fragment AnimalCardFragment on Animal {
+    id
     name
     type
     diet
