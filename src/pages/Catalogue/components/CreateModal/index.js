@@ -1,16 +1,8 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import capitalize from "lodash/fp/capitalize";
 import {
   Button,
-  FormControl,
-  FormLabel,
-  Select,
   Flex,
-  Stack,
-  Switch,
-  Input,
-  FormErrorMessage,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -18,7 +10,7 @@ import {
 import { useMutation } from "@apollo/client";
 import * as Yup from "yup";
 
-import { ANIMAL_TYPE, ANIMAL_DIET_TYPE } from "../../../../consts";
+import { AnimalFormFields } from "../../../../components";
 import { CREATE_ANIMAL } from "./graphql";
 
 const validationSchema = Yup.object().shape({
@@ -64,79 +56,19 @@ export const CreateModal = () => {
           as="form"
           onSubmit={formik.handleSubmit}
         >
-          <Stack spacing={4}>
-            <FormControl isInvalid={formik.errors.name}>
-              <FormLabel htmlFor="name">Name</FormLabel>
-              <Input
-                id="name"
-                onChange={formik.handleChange}
-                name="name"
-                autoFocus
-              />
-              <FormErrorMessage>{formik.errors.name}</FormErrorMessage>
-            </FormControl>
+          <AnimalFormFields formik={formik} />
 
-            <FormControl isInvalid={formik.errors.type}>
-              <FormLabel htmlFor="type">Type</FormLabel>
-              <Select
-                id="type"
-                placeholder="Select type"
-                onChange={formik.handleChange}
-                name="type"
-              >
-                {Object.keys(ANIMAL_TYPE).map((option) => (
-                  <option key={option} value={option}>
-                    {capitalize(option)}
-                  </option>
-                ))}
-              </Select>
-              <FormErrorMessage>{formik.errors.type}</FormErrorMessage>
-            </FormControl>
-
-            <FormControl isInvalid={formik.errors.diet}>
-              <FormLabel htmlFor="diet">Dietry requirements</FormLabel>
-              <Select
-                id="diet"
-                placeholder="Select diet type"
-                onChange={formik.handleChange}
-                name="diet"
-              >
-                {Object.keys(ANIMAL_DIET_TYPE).map((option) => (
-                  <option key={option} value={option}>
-                    {capitalize(option)}
-                  </option>
-                ))}
-              </Select>
-              <FormErrorMessage>{formik.errors.diet}</FormErrorMessage>
-            </FormControl>
-
-            <FormControl>
-              <Flex alignItems="center">
-                <FormLabel flex={1} htmlFor="extinct">
-                  Extinct
-                </FormLabel>
-                <Switch
-                  id="extinct"
-                  size="lg"
-                  color="blue"
-                  onChange={formik.handleChange}
-                  name="extinct"
-                />
-              </Flex>
-            </FormControl>
-
-            <Flex borderTopWidth="1px" pt={4}>
-              <Button
-                ml="auto"
-                variantColor="blue"
-                type="submit"
-                isLoading={loading}
-                disabled={loading}
-              >
-                Create animal
-              </Button>
-            </Flex>
-          </Stack>
+          <Flex borderTopWidth="1px" pt={4} mt={4}>
+            <Button
+              ml="auto"
+              variantColor="blue"
+              type="submit"
+              isLoading={loading}
+              disabled={loading}
+            >
+              Create animal
+            </Button>
+          </Flex>
         </ModalContent>
       </Modal>
     </>

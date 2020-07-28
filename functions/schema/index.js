@@ -3,6 +3,7 @@ const { gql } = require("apollo-server-lambda");
 const typeDefs = gql`
   type Query {
     getAnimals: [Animal]
+    getAnimalById(id: ID!): Animal
   }
 
   type Mutation {

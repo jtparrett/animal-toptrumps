@@ -2,14 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import capitalize from "lodash/fp/capitalize";
 import { gql } from "@apollo/client";
-import {
-  Text,
-  Skeleton,
-  SimpleGrid,
-  Button,
-  Stack,
-  Box,
-} from "@chakra-ui/core";
+import { Text, Skeleton, SimpleGrid, Stack, Box } from "@chakra-ui/core";
 
 import {
   ANIMAL_TYPE,
@@ -18,7 +11,7 @@ import {
   ANIMAL_DIET_TYPE_ICONS,
 } from "../../consts";
 import { Card } from "../Card";
-import { DeleteModal } from "./components";
+import { DeleteModal, EditModal } from "./components";
 
 export const AnimalCard = ({ isLoading, animal }) => (
   <Card>
@@ -55,9 +48,7 @@ export const AnimalCard = ({ isLoading, animal }) => (
           <DeleteModal id={animal?.id} />
         </Box>
         <Box flex={1}>
-          <Button size="sm" variant="outline" w="100%">
-            Edit
-          </Button>
+          <EditModal id={animal?.id} />
         </Box>
       </Stack>
     )}
