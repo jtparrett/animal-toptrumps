@@ -1,26 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { ThemeProvider, theme, CSSReset } from "@chakra-ui/core";
+import { ApolloProvider } from "@apollo/client";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { client } from "./ApolloClient";
+import { Catalogue } from "./pages";
 
-export default App;
+export const App = () => (
+  <ThemeProvider theme={theme}>
+    <CSSReset />
+    <ApolloProvider client={client}>
+      <Catalogue />
+    </ApolloProvider>
+  </ThemeProvider>
+);
