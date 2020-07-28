@@ -9,7 +9,8 @@ const typeDefs = gql`
     id: ID!
     name: String
     type: AnimalType
-    diet: AnimalDiet
+    diet: AnimalDietType
+    extinct: Boolean
   }
 
   enum AnimalType {
@@ -19,7 +20,7 @@ const typeDefs = gql`
     AMPHIBIOUS
   }
 
-  enum AnimalDiet {
+  enum AnimalDietType {
     CARNIVORE
     HERBIVORE
   }
