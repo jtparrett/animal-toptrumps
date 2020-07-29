@@ -7,8 +7,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createAnimal(animal: AnimalInput!): Boolean
+    createAnimal(values: AnimalInput!): Boolean
     deleteAnimal(id: ID!): Boolean
+    updateAnimal(id: ID!, values: AnimalInput!): Animal
   }
 
   type Animal {

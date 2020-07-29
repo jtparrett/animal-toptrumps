@@ -34,10 +34,10 @@ export const CreateModal = () => {
       diet: "",
       extinct: false,
     },
-    onSubmit: (animal) => {
+    onSubmit: (values) => {
       createAnimal({
         variables: {
-          animal,
+          values,
         },
       });
     },

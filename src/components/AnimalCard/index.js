@@ -16,11 +16,12 @@ import { DeleteModal, EditModal } from "./components";
 export const AnimalCard = ({ isLoading, animal }) => (
   <Card>
     <SimpleGrid columns={1} spacing={2}>
-      <Skeleton height="36px" w="75%" isLoaded={!isLoading}>
+      {isLoading && <Skeleton height="36px" w="75%" />}
+      {!isLoading && (
         <Text fontSize="2xl" fontWeight="bold">
           {animal?.name}
         </Text>
-      </Skeleton>
+      )}
 
       <Card.Stat
         name="Type"

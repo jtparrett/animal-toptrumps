@@ -8,10 +8,17 @@ import {
   ModalContent,
   Flex,
 } from "@chakra-ui/core";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
+import * as Yup from "yup";
 
 import { AnimalFormFields } from "../../../AnimalFormFields";
-import { GET_ANIMAL_BY_ID } from "./graphql";
+import { GET_ANIMAL_BY_ID, UPDATE_ANIMAL } from "./graphql";
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required(),
+  type: Yup.string().required(),
+  diet: Yup.string().required(),
+});
 
 export const EditModal = ({ id }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,17 +28,28 @@ export const EditModal = ({ id }) => {
       id,
     },
   });
+  const [updateAnimal, { loading: saving }] = useMutation(UPDATE_ANIMAL, {
+    onCompleted: () => setIsOpen(false),
+  });
   const animal = data?.getAnimalById;
 
   const formik = useFormik({
     enableReinitialize: true,
+    validationSchema,
     initialValues: {
-      name: animal?.name,
-      type: animal?.type,
-      diet: animal?.diet,
-      extinct: animal?.extinct,
+      name: animal?.name ?? "",
+      type: animal?.type ?? "",
+      diet: animal?.diet ?? "",
+      extinct: animal?.extinct ?? false,
     },
-    onSubmit: () => {},
+    onSubmit: (values) => {
+      updateAnimal({
+        variables: {
+          id,
+          values,
+        },
+      });
+    },
   });
 
   return (
@@ -55,7 +73,13 @@ export const EditModal = ({ id }) => {
           <AnimalFormFields formik={formik} />
 
           <Flex borderTopWidth="1px" pt={4} mt={4}>
-            <Button ml="auto" variantColor="blue" type="submit">
+            <Button
+              ml="auto"
+              variantColor="blue"
+              type="submit"
+              isLoading={saving}
+              disabled={saving}
+            >
               Save changes
             </Button>
           </Flex>

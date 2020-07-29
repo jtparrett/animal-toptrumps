@@ -1,5 +1,5 @@
-module.exports = async (root, { animal }, { client, q }) => {
-  const { name, type, diet, extinct } = animal;
+module.exports = async (root, { values }, { client, q }) => {
+  const { name, type, diet, extinct } = values;
 
   await client.query(
     q.Create(q.Collection("Animals"), {

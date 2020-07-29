@@ -20,7 +20,7 @@ export const AnimalFormFields = ({ formik }) => (
       <Input
         id="name"
         onChange={formik.handleChange}
-        value={formik.values.name || ""}
+        value={formik.values.name}
         name="name"
         autoFocus
       />
@@ -33,7 +33,7 @@ export const AnimalFormFields = ({ formik }) => (
         id="type"
         placeholder="Select type"
         onChange={formik.handleChange}
-        value={formik.values.type || ""}
+        value={formik.values.type}
         name="type"
       >
         {Object.keys(ANIMAL_TYPE).map((option) => (
@@ -51,7 +51,7 @@ export const AnimalFormFields = ({ formik }) => (
         id="diet"
         placeholder="Select diet type"
         onChange={formik.handleChange}
-        value={formik.values.diet || ""}
+        value={formik.values.diet}
         name="diet"
       >
         {Object.keys(ANIMAL_DIET_TYPE).map((option) => (
@@ -73,7 +73,7 @@ export const AnimalFormFields = ({ formik }) => (
           size="lg"
           color="blue"
           onChange={formik.handleChange}
-          value={formik.values.extinct}
+          isChecked={formik.values.extinct}
           name="extinct"
         />
       </Flex>
