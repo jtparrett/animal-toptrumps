@@ -18,7 +18,7 @@ export const AnimalCard = ({ isLoading, animal }) => (
     <SimpleGrid columns={1} spacing={2}>
       {isLoading && <Skeleton height="36px" w="75%" />}
       {!isLoading && (
-        <Text fontSize="2xl" fontWeight="bold">
+        <Text fontSize="2xl" fontWeight="bold" as="h1">
           {animal?.name}
         </Text>
       )}

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Box, Skeleton, Flex, Text } from "@chakra-ui/core";
 
 export const Card = ({ children }) => (
-  <Box borderWidth="1px" rounded="md" overflow="hidden" p={4}>
+  <Box borderWidth="1px" rounded="md" overflow="hidden" p={4} as="article">
     {children}
   </Box>
 );
