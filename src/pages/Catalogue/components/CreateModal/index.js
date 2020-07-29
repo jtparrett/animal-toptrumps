@@ -22,7 +22,10 @@ const validationSchema = Yup.object().shape({
 export const CreateModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [createAnimal, { loading }] = useMutation(CREATE_ANIMAL, {
-    onCompleted: () => setIsOpen(false),
+    onCompleted: () => {
+      formik.resetForm();
+      setIsOpen(false);
+    },
     update(cache, { data: { createAnimal } }) {
       cache.modify({
         fields: {
