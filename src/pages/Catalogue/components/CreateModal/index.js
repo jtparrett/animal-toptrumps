@@ -10,7 +10,7 @@ import {
 import { useMutation } from "@apollo/client";
 import * as Yup from "yup";
 
-import { AnimalFormFields } from "../../../../components";
+import { AnimalFormFields, AnimalCardFragment } from "../../../../components";
 import { CREATE_ANIMAL } from "./graphql";
 
 const validationSchema = Yup.object().shape({
@@ -22,9 +22,20 @@ const validationSchema = Yup.object().shape({
 export const CreateModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [createAnimal, { loading }] = useMutation(CREATE_ANIMAL, {
-    refetchQueries: ["getAnimalsCatalogue"],
-    awaitRefetchQueries: true,
     onCompleted: () => setIsOpen(false),
+    update(cache, { data: { createAnimal } }) {
+      cache.modify({
+        fields: {
+          getAnimals(existingAnimals = []) {
+            const newAnimalRef = cache.writeFragment({
+              data: createAnimal,
+              fragment: AnimalCardFragment,
+            });
+            return [...existingAnimals, newAnimalRef];
+          },
+        },
+      });
+    },
   });
   const formik = useFormik({
     validationSchema,

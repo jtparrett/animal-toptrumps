@@ -17,10 +17,17 @@ export const DeleteModal = ({ id }) => {
   const closeModal = () => setIsOpen(false);
 
   const [deleteAnimal, { loading }] = useMutation(DELETE_ANIMAL, {
-    refetchQueries: ["getAnimalsCatalogue"],
-    awaitRefetchQueries: true,
     variables: {
       id,
+    },
+    update(cache) {
+      cache.modify({
+        fields: {
+          getAnimals(existingAnimals = [], { readField }) {
+            return existingAnimals.filter((ref) => readField("id", ref) !== id);
+          },
+        },
+      });
     },
   });
 
