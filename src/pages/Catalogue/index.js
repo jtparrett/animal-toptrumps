@@ -11,7 +11,7 @@ export const Catalogue = () => {
 
   return (
     <Wrapper py={10}>
-      <Flex alignItems="flex-end" pb={4}>
+      <Flex alignItems="center" mb={4}>
         <Text fontSize="4xl" fontWeight="bold" mr="auto">
           Catalogue
         </Text>
